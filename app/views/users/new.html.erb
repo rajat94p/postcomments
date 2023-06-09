@@ -1,0 +1,16 @@
+<center><h1>Sign up</h1>
+<%= form_for @user, url: signup_path, method: :post do |form|%>
+<%= form.label :email%>
+<%= form.email_field :email%><br /><br />
+
+<%= form.label :phone%>
+<%= form.text_field :phone%><br /><br />
+
+<%= form.label :password%>
+<%= form.password_field :password%><br /><br />
+
+
+<%= form.submit%>
+<% end %>
+
+</center>

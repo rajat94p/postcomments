@@ -1,0 +1,15 @@
+<center><h3>Plese Login Here</h3></ceneter>
+
+<center>
+<%= form_tag signin_path, method: :post   do |form|%>
+<%= label_tag :email%>
+<%= text_field_tag :email%><br /><br />
+
+<%= label_tag :password%>
+<%= password_field_tag :password%><br /><br />
+
+
+<%= submit_tag 'Login'%>
+<% end %>
+
+</center>
