@@ -9,6 +9,8 @@ class PostsController < ApplicationController
 
   def show
   	@post = Post.find(params[:id])
+  	@comments = @post.comments.includes(:user)
+  	@comment = Comment.new
   end
 
 	def new
@@ -16,7 +18,6 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		debugger
 		@post = current_user.posts.create(post_params)
 			if @post.save
 				redirect_to root_path

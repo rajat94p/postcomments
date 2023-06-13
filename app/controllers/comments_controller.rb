@@ -1,23 +1,26 @@
 class CommentsController < ApplicationController
-	before_action :set_user
-	before_action :set_post
-
 	def index
 		@comments = Comment.all
-	end
-
-	def new
 		@comment = Comment.new
 	end
-
-	def show
+	
+	def new
+		@post = Post.find(params[:id])
+  		@comment = @post.comments.new(comment_params)
 	end
 
+	def show 
+		@comment = Comment.find(params[:id])
+
+	end
+
+
 	def create
-		debugger
-		@comment = Comment.create(comment_params)
+		@user = User.find(params[:user_id])
+		@post = Post.find(params[:post_id])
+		@comment = @post.comments.new(comment_params.merge!(user_id: current_user.id))
 		if @comment.save 
-			redirect_to root_path
+			redirect_to user_post_path(@post, @user), method: :post
 		else
 			render :new
 		end
@@ -28,14 +31,6 @@ private
 
 	def comment_params
 		params.require(:comment).permit(:user_id, :post_id, :comment)
-	end
-
-	def set_user
-		@user = User.find(params[:user_id])
-	end
-
-	def set_post
-		@post = Post.find(params[:post_id])
 	end
 
 end

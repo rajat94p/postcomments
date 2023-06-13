@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root "homes#index"
 
-  resources :users
 
   resources :sessions
 
@@ -15,8 +14,9 @@ Rails.application.routes.draw do
 
   
 
-   
-  resources :posts do
-    resources :comments 
+  resources :users do  
+    resources :posts do
+      resources :comments 
+    end
   end
 end

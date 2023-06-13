@@ -1,20 +1,22 @@
 <center><h1>Welcome User </h1></center>
 
 
-  <% if current_user %>
-    <center>  Signed in as <%="Hi #{current_user.email}" %> <br > <%= link_to "Logout", signout_path %></center>
+<% if current_user %>
+  <center>  Signed in as <%="Hi #{current_user.email}" %> <br > <%= link_to "Logout", signout_path %></center>
       <% if current_user.present?%><br>
-        <center><%= link_to 'New post', new_post_path(user_id: current_user.id)%> | 
-        <%= link_to 'My post', posts_path(user_id: current_user.id)%> |
-        <%= link_to 'New comment', new_post_comment_path(user_id: current_user.id, post_id: current_user.id)%></center>
+        <center><%= link_to 'New post', new_user_post_path(user_id: current_user.id)%> | 
+        <%= link_to 'My post', user_posts_path(user_id: current_user.id)%> |
+        <%= link_to 'All Comments', user_post_comments_path(user_id: current_user.id, post_id: current_user.id)%></center>
 
-      <ul><% @posts.each do |post|%>
-          <%=link_to post.post%><br>
-          <% end %>
-        <center><%#= button_to 'Back', root_path %></center>
-      <% end %></ul>
+        <ul><% @posts.each do |post| %>
+          <li>
+            <%= link_to post.post, user_post_path(user_id: current_user.id, id: post.id) %><br>
+          </li>
+            <% end %>
+        </ul>
+      <% end %>
       
 <% else %>
-  <%= link_to 'SingIn', new_session_path %> | <%= link_to 'SignUp', new_user_path %>
+  <center> <%= link_to 'SingIn', new_session_path %> | <%= link_to 'SignUp', new_user_path %></center>
 <% end %>
   

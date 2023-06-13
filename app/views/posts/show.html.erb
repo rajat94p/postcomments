@@ -1,4 +1,29 @@
-<h5><%= current_user.posts %></h5>
+<center><h1>Add Comments</h1></center>
+
+<center><%= form_for [@user, @post, @comment], url: user_post_comments_path(@user, @post), method: :post do |form| %>
+  <div>
+    <%= form.label :comment %><br>
+    <%= form.text_field :comment %><br /><br/ >
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+  <% end %>
+</center>
 
 
+<center><h2>Post-Name:<%= @post.post %></h2></center>
 
+
+<h2>Comments</h2>
+<ul>
+    <% @comments.each do |comment| %>
+    <li>
+      <%= comment.comment %>
+    </li>
+    <% end %>
+</ul>
+
+
+<%= link_to "Back", root_path %>
